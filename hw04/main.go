@@ -2,30 +2,30 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
-	"time"
 )
 
 func main() {
+	fmt.Println("Сортировка массива вставками по убыванию!!")
 	var n int
 	fmt.Print("Введите кол-во элементов массива для сортировки: ")
-	fmt.Scanln(&n)
-	// генерируем последовательность для сортировки
+	fmt.Scan(&n)
+	fmt.Println("Введите э-ты массива (один элемент на строку):")
+	var x int
 	var v []int
-	rand.Seed(int64(time.Now().Nanosecond()))
 	for i := 0; i < n; i++ {
-		v = append(v, rand.Intn(100))
+		fmt.Scanln(&x)
+		v = append(v, x)
 	}
-	fmt.Println(v)
+	fmt.Println("Массив до сортировки:", v)
 
 	for i := 0; i < len(v); i++ {
-		key := v[i] // просматриваем эл-т исходного массива и его индекс
-		j := i
-		for j > 0 && v[j-1] > key { // получается нет проверки второго условия цикла когда j = 0 ?
-			v[j] = v[j-1] // если предыдущий эл-т больше просматриваемого - меняем его и его позицию
+		m := v[i] // запомним i эл-т
+		j := i    // запомним его индекс
+		for j > 0 && m > v[j-1] {
+			v[j] = v[j-1]
 			j = j - 1
 		}
-		v[j] = key
+		v[j] = m
 	}
-	fmt.Println(v)
+	fmt.Println("    после сортировки:", v)
 }
