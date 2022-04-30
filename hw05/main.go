@@ -35,20 +35,20 @@ func fibbonacci(a int) int {
 	return fibbonacci(a-1) + fibbonacci(a-2)
 }
 
-var m = map[int]int{}
+var m = map[int]int{0: 0, 1: 1}
 
 func fibbonacciMap(a int) int {
 	_, x := m[a-1]
 	_, y := m[a-2]
 
-	if a <= 1 && (!x || !y) {
-		m[a] = a
+	if a <= 1 {
 		return m[a]
 	}
 
-	if !x || !y {
-		v := fibbonacciMap(a-1) + fibbonacciMap(a-2)
-		m[a] = v
+	if !x {
+		m[a] = fibbonacciMap(a-1) + m[a-2]
+	} else if !y {
+		m[a] = m[a-1] + fibbonacciMap(a-2)
 	} else {
 		m[a] = m[a-1] + m[a-2]
 	}
