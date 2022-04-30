@@ -7,6 +7,13 @@ import (
 )
 
 func main() {
+
+	defer func() {
+		err:= recover()
+		if err != nil {
+			fmt.Println(err)
+		}
+	}()
 	var a, b, res float64
 	var op string
 
@@ -28,8 +35,8 @@ func main() {
 		res = a * b
 	case "/":
 		if b == 0 {
-			fmt.Println("Второе число не должно быть равно 0! На 0 делить нельзя!")
-			os.Exit(1)
+			panic("Второе число не должно быть равно 0! На 0 делить нельзя!")
+			// os.Exit(1)
 		}
 		res = a / b
 	case "!":
