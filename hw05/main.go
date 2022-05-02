@@ -38,20 +38,10 @@ func fibbonacci(a int) int {
 var m = map[int]int{0: 0, 1: 1}
 
 func fibbonacciMap(a int) int {
-	_, x := m[a-1]
-	_, y := m[a-2]
-
-	if a <= 1 {
-		return m[a]
+	nF, ok := m[a]
+	if !ok {
+		nF = fibbonacciMap(a-1) + fibbonacciMap(a-2)
+		m[a] = nF
 	}
-
-	if !x {
-		m[a] = fibbonacciMap(a-1) + m[a-2]
-	} else if !y {
-		m[a] = m[a-1] + fibbonacciMap(a-2)
-	} else {
-		m[a] = m[a-1] + m[a-2]
-	}
-
-	return m[a]
+	return nF
 }
