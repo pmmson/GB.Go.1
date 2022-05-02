@@ -15,33 +15,23 @@ func (s *Slb) Write(x []byte) (n int, err error) {
 }
 
 // io.Reader
-// func (s *Slb) Read(x []byte) (n int, err error) {
-// 	sl := make([]byte, len(*s))
-// 	x = append(x, sl...)
-// 	n = copy(x, *s)
-// 	return
-// }
-
-func (s *Slb) Read(x *[]byte) (n int, err error) {
-	sl := make([]byte, len(*s))
-	*x = append(*x, sl...)
-	n = copy(*x, *s)
+func (s *Slb) Read(x []byte) (n int, err error) {
+	n = copy(x, *s)
+	err = io.EOF // добавил, так как при debug увидел, что выходом из бесконечного цикла в io.ReadAll является это условие
 	return
 }
 
 func main() {
 
-	var z Slb
-
 	// С помощью io.WriteString записать в переменную вашего типа произвольную строку
-	io.WriteString(&z, "QazWerTy=!")
+	var z Slb
+	io.WriteString(&z, "QWertuIopaHDklzBG-+msjfnKZKNDKnskslmx")
 	fmt.Println(z)
 
-	var x []byte
-	z.Read(&x)
-	fmt.Println(string(x))
-
 	// С помощью io.ReadAll( ) считать вашу строку обратно (вообще говоря, он возвращает слайс байт, но его легко привести к виду строки)
-	// не нашел такой функции в пакете io
+	var x []byte
+	x, _ = io.ReadAll(&z)
+
+	fmt.Println(string(x))
 
 }
