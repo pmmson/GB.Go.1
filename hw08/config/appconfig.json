@@ -1,0 +1,12 @@
+{
+    "host": "127.0.0.1",
+    "port": 8082,
+    "dbpgurl": "postgres://testuser:testpass@storedb:5432/petstore?sslmode=disable",
+    "jaegerurl": "http://jaeger:16234",
+    "sentryurl": "http//sentry:9000",
+    "kafka": "kafka:9092",
+    "appsettings": {
+        "appid": "prod",
+        "apptoken": "kejdjwkKWNDkwjJEFKJSEndaKAwjnda"
+    }
+}
